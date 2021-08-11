@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Coding Train: Data/APIs 1</title>
+  </head>
+  <body>
+    <h1>Fetch Rappers</h1>
+
+    <p>Here are some images of your favorite rappers using the Fetch API</p>
+
+    <script>
+
+      //writes message to console
+      console.log('about to fetch some rappers');
+
+      //array stores all of the image filenames
+      //ie All the pictures in the image folder
+      const filenames = [
+        'images/daniele-levis-pelusi-311027-unsplash.jpg',
+        'images/guy-stevens-746794-unsplash.jpg',
+        //'images/sharon-pittaway-98257-unsplash.jpg'
+        'images/pop_smoke.jpg'
+
+      ];
+
+      //runs function with try/catch
+      catchRainbows(filenames)
+        .then(response => {
+          console.log('yay');
+        })
+        .catch(error => {
+          console.log('error!');
+          console.error(error);
+        });
+
+      
+      //async function
+      async function catchRainbows(filenames) {
+
+        //for loops runs through all of filenames
+        for (let filename of filenames) {
+
+          //im not 100% sure what this is all doing
+          const response = await fetch(filename);
+          const blob = await response.blob();
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(blob);
+
+          //sets image height
+          img.height = '200';
+
+          //adds image
+          document.body.append(img);
+        }
+      }
+    </script>
+  </body>
+</html>
